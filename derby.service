@@ -1,0 +1,14 @@
+[Unit]
+Description=Apache Derby Database Network Server
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/lib/derby
+StandardOutput=syslog
+User=derby
+ExecStart=/usr/bin/derby-NetworkServerControl start
+ExecStop=/usr/bin/derby-NetworkServerControl shutdown
+
+[Install]
+WantedBy=multi-user.target
