@@ -1,0 +1,25 @@
+--- java/optional/org/apache/derby/optional/api/LuceneUtils.java.orig	2015-06-18 17:39:57.626721793 +0100
++++ java/optional/org/apache/derby/optional/api/LuceneUtils.java	2015-06-18 17:40:24.430371127 +0100
+@@ -108,21 +108,7 @@
+     @SuppressWarnings("deprecation")
+     public  static  Version currentVersion()
+     {
+-        Version retval = null;
+-
+-        // the current version is the highest one
+-        for ( Version current : Version.values() )
+-        {
+-            if ( current == Version.LUCENE_CURRENT ) { continue; }
+-            
+-            if ( retval == null ) { retval = current; }
+-            else
+-            {
+-                if ( current.onOrAfter( retval ) ) { retval = current; }
+-            }
+-        }
+-        
+-        return retval;
++        return Version.LATEST;
+     }
+ 
+     /**
