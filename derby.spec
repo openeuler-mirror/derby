@@ -1,6 +1,6 @@
 Name:                derby
 Version:             10.13.1.1
-Release:             1
+Release:             2
 Summary:             Relational database implemented entirely in Java
 License:             ASL 2.0
 URL:                 http://db.apache.org/derby/
@@ -9,6 +9,7 @@ Source1:             derby-script
 Source2:             derby.service
 Patch1:              derby-javacc.patch
 Patch2:              derby-lucene.patch
+Patch3:              CVE-2018-1313.patch
 
 BuildRequires:       apache-parent javapackages-local glassfish-servlet-api jakarta-oro javacc
 BuildRequires:       json_simple lucene4 junit ant systemd
@@ -36,6 +37,7 @@ find -name '*.class' -delete
 pushd db-derby-%{version}-src
 %patch1 -p0
 %patch2 -p0
+%patch3 -p1
 sed -i -e '/Class-Path/d' build.xml
 sed -e 's/initjars,set-doclint,install_packagelists/initjars,set-doclint/' \
     -e '/<link offline/,+1d' \
@@ -111,5 +113,11 @@ exit 0
 %license db-derby-%{version}-src/NOTICE
 
 %changelog
+* Tue Nov 11 2020 wangxiao <wangxiao65@huawei.com> - 10.13.1.1-2
+- fix CVE-2018-1313
+- a specially-crafted network packet can be used to request the
+- Derby Network Server to boot a database whose location and contents
+- are under the user's control.
+
 * Thu Jul 30 2020 leiju <leiju4@huawei.com> - 10.13.1.1-1
 - Package init
