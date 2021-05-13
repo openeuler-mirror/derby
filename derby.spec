@@ -1,6 +1,6 @@
 Name:                derby
 Version:             10.13.1.1
-Release:             2
+Release:             3
 Summary:             Relational database implemented entirely in Java
 License:             ASL 2.0
 URL:                 http://db.apache.org/derby/
@@ -17,6 +17,7 @@ Requires(pre):       shadow-utils
 Requires(post):      systemd
 Requires(preun):     systemd
 Requires(postun):    systemd
+Requires:            javapackages-tools
 BuildArch:           noarch
 
 %description
@@ -113,6 +114,9 @@ exit 0
 %license db-derby-%{version}-src/NOTICE
 
 %changelog
+* Thu May 13 2021 lingsheng <lingsheng@huawei.com> - 10.13.1.1-3
+- Add requires javapackages-tools to fix derby service start
+
 * Tue Nov 11 2020 wangxiao <wangxiao65@huawei.com> - 10.13.1.1-2
 - fix CVE-2018-1313
 - a specially-crafted network packet can be used to request the
